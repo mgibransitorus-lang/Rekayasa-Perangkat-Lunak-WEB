@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurusan RPL - SMKN 3 Medan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & VARIABEL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f3d5c;      /* biru gelap */
+            --secondary: #0ea5e9;    /* biru langit */
+            --accent: #14b8a6;       /* teal */
+            --bg-light: #f1f9fb;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo span {
+            color: var(--accent);
+            font-size: 0.8rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav ul a:hover {
+            color: var(--secondary);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+        }
+
+        /* ===== SECTION UMUM ===== */
+        section {
+            padding: 5rem 10%;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .section-content.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .text-block {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .text-block p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .text-block ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-light);
+        }
+
+        .text-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .image-block {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .image-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .image-block:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ===== BAHASA PEMROGRAMAN GRID ===== */
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .lang-card {
+            background: var(--white);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--accent);
+        }
+
+        .lang-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ===== THANK YOU SECTION ===== */
+        .thank-you {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 10%;
+        }
+
+        .thank-you h2 {
+            color: var(--white);
+        }
+
+        .thank-you h2::after {
+            background: var(--white);
+        }
+
+        .thank-you p {
+            font-size: 1.15rem;
+            margin-bottom: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .thank-you .professor {
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 2rem;
+            font-size: 1rem;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 1.5rem;
+            display: inline-block;
+        }
+
+        .thank-you .school {
+            display: block;
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: 2px;
+            color: #fef3c7;
+            margin-top: 0.6rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0b1220;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2.5rem 5%;
+            font-size: 0.95rem;
+        }
+
+        footer .creator {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+
+        footer .class {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-content p { font-size: 1rem; }
+            nav ul { display: none; }
+            section { padding: 3rem 5%; }
+            .section-content, .section-content.reverse { flex-direction: column; }
+            .text-block, .image-block { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <div class="logo">RPL<span>SMKN 3 MEDAN</span></div>
+        <ul>
+            <li><a href="#pengertian">Pengertian</a></li>
+            <li><a href="#sejarah">Sejarah</a></li>
+            <li><a href="#bahasa">Bahasa Pemrograman</a></li>
+            <li><a href="#prospek">Prospek Kerja</a></li>
+            <li><a href="#manfaat">Manfaat</a></li>
+            <li><a href="#tujuan">Tujuan</a></li>
+            <li><a href="#kesimpulan">Kesimpulan</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">SMKN 3 MEDAN</div>
+            <h1>Rekayasa Perangkat Lunak</h1>
+            <p>Mencetak generasi developer andal, kreatif, dan siap bersaing di era digital.</p>
+        </div>
+    </header>
+
+    <!-- ===== PENGERTIAN ===== -->
+    <section id="pengertian">
+        <h2>Pengertian Jurusan RPL</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p><strong>RPL (Rekayasa Perangkat Lunak)</strong> adalah jurusan di Sekolah Menengah Kejuruan (SMK) yang mempelajari dan mendalami semua cara-cara pengembangan perangkat lunak, termasuk pembuatan, pemeliharaan, manajemen organisasi pengembangan perangkat lunak, dan manajemen kualitas.</p>
+                <p>Jurusan ini fokus pada pengembangan perangkat lunak komputer seperti pembuatan website, aplikasi, game, dan segala hal yang berkaitan dengan pemrograman menggunakan berbagai bahasa pemrograman. Siswa RPL tidak hanya belajar "coding", tetapi juga analisis kebutuhan, desain antarmuka, pengujian, hingga dokumentasi.</p>
+                <p>Secara garis besar, RPL berkutat pada tiga aspek utama: <strong>Coding, Desain, dan Algoritma</strong>.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80" alt="Layar komputer menampilkan kode pemrograman">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEJARAH ===== -->
+    <section id="sejarah" style="background: var(--white);">
+        <h2>Sejarah Jurusan RPL</h2>
+        <div class="section-content reverse">
+            <div class="text-block">
+                <p>Jurusan RPL mulai diperkenalkan di SMK seiring dengan meningkatnya kebutuhan industri teknologi informasi dan komputer. Di beberapa sekolah, RPL dibuka sekitar tahun 2004 sebagai bagian dari penyesuaian kurikulum menghadapi era digital.</p>
+                <p>Pada awalnya, RPL fokus pada pemahaman dasar perangkat keras dan perangkat lunak komputer. Seiring perkembangan teknologi, kurikulum RPL terus mengalami penyesuaian, mulai dari penginstalan sistem operasi, konsep dasar pemrograman dan algoritma, hingga pembuatan website, aplikasi desktop, aplikasi berbasis web, dan aplikasi mobile.</p>
+                <p>Saat ini, RPL menjadi salah satu jurusan paling diminati di SMK karena prospek kariernya yang luas di industri teknologi.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Laboratorium komputer dengan siswa belajar coding">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BAHASA PEMROGRAMAN ===== -->
+    <section id="bahasa">
+        <h2>Bahasa Pemrograman yang Dipelajari</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p>Di jurusan RPL, siswa akan mempelajari berbagai bahasa pemrograman yang menjadi fondasi utama dalam pengembangan perangkat lunak. Beberapa di antaranya adalah:</p>
+                <div class="lang-grid">
+                    <div class="lang-card">Pascal</div>
+                    <div class="lang-card">C</div>
+                    <div class="lang-card">C++</div>
+                    <div class="lang-card">Java</div>
+                    <div class="lang-card">Python</div>
+                    <div class="lang-card">PHP &amp; MySQL</div>
+                    <div class="lang-card">JavaScript</div>
+                    <div class="lang-card">HTML &amp; CSS</div>
+                    <div class="lang-card">Delphi</div>
+                    <div class="lang-card">AJAX</div>
+                    <div class="lang-card">Laravel</div>
+                    <div class="lang-card">Git &amp; GitHub</div>
+                </div>
+                <p style="margin-top: 1.5rem;">Setiap bahasa pemrograman memiliki keunikan dan fungsionalitas tersendiri yang akan digunakan dalam berbagai jenis pengembangan perangkat lunak.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80" alt="Contoh kode pemrograman di layar monitor">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROSPEK KERJA ===== -->
+    <section id="prospek" style="background: var(--white);">
+        <h2>Prospek Kerja Lulusan RPL</h2>
+        <div class="section-content reverse">
+            <div class="text-block">
+                <p>Lulusan RPL memiliki peluang karier yang sangat luas, baik di perusahaan teknologi, instansi pemerintah, maupun sebagai pekerja lepas (freelancer). Beberapa profesi yang bisa digeluti antara lain:</p>
+                <ul>
+                    <li><strong>Web Developer:</strong> merancang dan membangun situs web (frontend maupun backend).</li>
+                    <li><strong>Mobile App Developer:</strong> membuat aplikasi Android atau iOS.</li>
+                    <li><strong>Software Engineer:</strong> mengembangkan perangkat lunak berskala besar.</li>
+                    <li><strong>UI/UX Designer:</strong> merancang tampilan dan pengalaman pengguna aplikasi.</li>
+                    <li><strong>QA / Software Tester:</strong> menguji kualitas dan keamanan perangkat lunak.</li>
+                    <li><strong>Database Administrator:</strong> mengelola basis data perusahaan.</li>
+                    <li><strong>Game Developer:</strong> membuat game untuk berbagai platform.</li>
+                    <li><strong>IT Support / System Analyst:</strong> mendukung sistem TI dan menganalisis kebutuhan bisnis.</li>
+                </ul>
+                <p>Selain bekerja di perusahaan, lulusan RPL juga dapat membuka <strong>usaha sendiri (startup digital)</strong>, menjadi freelancer di platform global, atau melanjutkan kuliah di bidang Informatika, Sistem Informasi, dan Teknik Komputer.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Tim developer bekerja bersama mengembangkan aplikasi">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MANFAAT ===== -->
+    <section id="manfaat">
+        <h2>Manfaat Jurusan RPL</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p>Jurusan RPL memberikan banyak manfaat bagi siswanya, antara lain:</p>
+                <ul>
+                    <li><strong>Siap kerja:</strong> Siswa dilatih dengan keterampilan praktis yang memungkinkan mereka langsung terjun ke dunia kerja setelah lulus.</li>
+                    <li><strong>Memahami komputer secara mendalam:</strong> Mulai dari perakitan PC hingga pemahaman fungsi setiap komponen.</li>
+                    <li><strong>Fleksibilitas kerja:</strong> Tugas-tugas RPL umumnya dapat dikerjakan dari mana saja dan kapan saja karena mayoritas menggunakan laptop dan koneksi internet.</li>
+                    <li><strong>Peluang melanjutkan kuliah:</strong> Siswa dapat melanjutkan studi ke jenjang perguruan tinggi, terutama di bidang ilmu komputer atau teknik informatika.</li>
+                    <li><strong>Mendorong kreativitas dan inovasi</strong> melalui proyek nyata, serta peluang besar untuk bekerja di industri teknologi atau menjadi freelancer/pebisnis digital.</li>
+                </ul>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Programmer sedang menulis kode di laptop">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TUJUAN ===== -->
+    <section id="tujuan" style="background: var(--white);">
+        <h2>Tujuan Jurusan RPL</h2>
+        <div class="section-content reverse">
+            <div class="text-block">
+                <p>Tujuan utama jurusan RPL adalah:</p>
+                <ul>
+                    <li>Mempersiapkan siswa menjadi tenaga kerja profesional di bidang pengembangan perangkat lunak.</li>
+                    <li>Mengembangkan keterampilan logika, pemrograman, dan pemecahan masalah berbasis teknologi.</li>
+                    <li>Membekali siswa dengan kemampuan berwirausaha di bidang teknologi informasi.</li>
+                    <li>Mewujudkan kurikulum berbasis industri agar lulusan terserap ke dunia usaha dan dunia industri.</li>
+                </ul>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Siswa belajar coding di laboratorium">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KESIMPULAN ===== -->
+    <section id="kesimpulan">
+        <h2>Kesimpulan</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p>Jurusan RPL (Rekayasa Perangkat Lunak) bukan sekadar tentang membuat program atau situs web. Jurusan ini mencakup berbagai aspek teknologi yang saling terkait dan berkembang seiring waktu, mulai dari coding, desain, algoritma, basis data, hingga manajemen proyek perangkat lunak.</p>
+                <p>Dengan mempelajari RPL, siswa tidak hanya memperoleh keterampilan teknis dalam pengembangan perangkat lunak, tetapi juga pengetahuan tentang desain, algoritma, dan berbagai teknologi lain yang berkaitan. Jurusan ini sangat luas dan menawarkan banyak peluang bagi mereka yang ingin berkarir di bidang teknologi informasi.</p>
+                <p>RPL adalah pilihan tepat bagi generasi muda yang ingin menjadi kreator teknologi, bukan sekadar pengguna.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?auto=format&fit=crop&w=800&q=80" alt="Developer muda sedang bekerja di depan komputer">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THANK YOU ===== -->
+    <section class="thank-you">
+        <h2>Terima Kasih</h2>
+        <p>Terima kasih sudah mengunjungi website ini.</p>
+        <p>Thank you for visiting this website.</p>
+        <p>このウェブサイトにお越しいただき、ありがとうございます。</p>
+        <p class="professor">
+            "Professor of Information Technology and Chemical Engineering"
+            <span class="school">SMKN 3 MEDAN</span>
+        </p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>Pembuat website:</p>
+        <p class="creator">MIKAIL FALAQ GIBRAN SITORUS</p>
+        <p class="class">X TKI 1</p>
+    </footer>
+
+</body>
+</html>
